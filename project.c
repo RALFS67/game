@@ -15,6 +15,7 @@ int main()
     uint8_t values[6][6];
     int row, col, size = 6;
     int gold = 0;
+    
 
     int locationX, locationY;
 
@@ -66,11 +67,20 @@ int main()
     printf("\t1\t2\t3\t4\t5\t6\n");
 
 
-    for (int loop = 0; loop < 18; loop++) {
-        printf("choose a location [x]: ");
-        scanf_s("%d", &locationX);
-        printf("choose a location [y]: ");
-        scanf_s("%d", &locationY);
+    for (int loop = 0; loop < 3; loop++) {
+        
+        do {
+
+            printf("choose a location [x]: ");
+            scanf_s("%d", &locationX);
+            printf("choose a location [y]: ");
+            scanf_s("%d", &locationY);
+        
+            if (displayGrid[locationX][locationY] != '$') {
+                printf("This location has already been searched, try again!\n");
+            }
+
+        } while (displayGrid[locationX][locationY] != '$');
 
         printf("You just choose [%d][%d] the real number is: %d\n", locationX, locationY, values[locationX][locationY]);
         //Ralf
@@ -83,8 +93,11 @@ int main()
 
         else if (values[locationX][locationY] & 2) {
             displayGrid[locationX][locationY] = 'G';
+
             values[locationX][locationY] = (values[locationX][locationY] >> 4);
+            
             gold = values[locationX][locationY];
+            printf("\nyou found %i gold", gold);
         }
 
         else
@@ -101,8 +114,8 @@ int main()
             }
             printf("\n");
         }
-        printf("\t1\t2\t3\t4\t5\t6\n");
-        printf("\nyou found %i gold", gold);//ralfs
+        printf("\t1\t2\t3\t4\t5\t6\n");//ralfs
     }
+        
     return 0;
 }
