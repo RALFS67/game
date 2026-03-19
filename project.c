@@ -42,7 +42,7 @@ int main()
         }
     }
 
-    srand((int)time(0));
+    srand((int)time(0));//ALE
 
     int currentPlayer;
     int randomStart = rand() % 2;//ALE 
@@ -57,7 +57,7 @@ int main()
             values[row][col] = rand() % 256;
             displayGrid[row][col] = '$';
         }
-    } //ale
+    } //Ale
 
 
     printf("\Grid:\n");//RalfsStart
@@ -71,7 +71,10 @@ int main()
     printf("\t1\t2\t3\t4\t5\t6\n");//ralfsEnd
 
 
-    for (int loop = 0; loop < 3; loop++) { //ralfsStart
+    for (int loop = 0; loop < 3; loop++) {
+
+
+        printf("Player %d is your turn \n", currentPlayer); // MULTIPLAYER ALE
         
         do {
 
@@ -89,7 +92,7 @@ int main()
         printf("You just choose [%d][%d] the real number is: %d\n", locationX, locationY, values[locationX][locationY]);
         
 
-        if (values[locationX][locationY] & 1) {
+        if (values[locationX][locationY] & 1) {//Ralfs
 
             displayGrid[locationX][locationY] = 'B';
 
@@ -118,7 +121,9 @@ int main()
             }
             printf("\n");
         }
-        printf("\t1\t2\t3\t4\t5\t6\n");//ralfsEnd
+        printf("\t1\t2\t3\t4\t5\t6\n");//Ralfs
+        currentPlayer = 3 - currentPlayer; // change player ALE
+
     }
         
     return 0;
