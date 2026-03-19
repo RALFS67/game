@@ -33,7 +33,7 @@ int main()
 	printf("choose a location [y]");
 	scanf(&locationY);
 
-
+	printf("test");
 
 
 	return(0);
