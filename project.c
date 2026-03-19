@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <time.h>
+#include <string.h>
 int main()
 {
 
@@ -12,7 +13,35 @@ int main()
 	
 	int locationX, locationY;
 
-	
+	char password[] = "Alex07";
+	char input[10];
+
+
+	for (int i = 0; i < 3; i++) {
+
+		printf("Enter the password: ");
+		fgets(input, sizeof(input), stdin);
+
+		if (input[strlen(input) - 1] == '\n') {
+			input[strlen(input) - 1] = '\0';
+		}
+
+		if (strcmp(password, input) == 0) {
+			printf("Correct password! The game starts now.\n");
+
+			break;
+		}
+		else {
+			if (i == 2) {
+				printf("Wrong password. No attempts left. Exit.\n");
+				return 0;
+			}
+			else {
+				printf("Wrong password... do you have Alzheimer's or something?\n");
+
+			}
+		}
+	}
 	
 
 	for (row = 0; row < size; row++) {
@@ -28,10 +57,10 @@ int main()
 	printf("\t1\t 2\t 3\t 4\t 5\t 6\n");
 
 	printf("choose a location [x] ");
-	scanf(&locationX);
+	scanf_s(&locationX);
 
 	printf("choose a location [y]");
-	scanf(&locationY);
+	scanf_s(&locationY);
 
 	printf("test");
 
