@@ -60,7 +60,7 @@ int main()
     } //Ale
 
 
-    printf("\Grid:\n");//Ralf
+    printf("\Grid:\n");//RalfsStart
     for (row = 0; row < size; row++) {
         printf("%d\t", row);
         for (col = 0; col < size; col++) {
@@ -68,7 +68,7 @@ int main()
         }
         printf("\n"); 
     }
-    printf("\t1\t2\t3\t4\t5\t6\n");
+    printf("\t1\t2\t3\t4\t5\t6\n");//ralfsEnd
 
 
     for (int loop = 0; loop < 3; loop++) {
@@ -90,7 +90,7 @@ int main()
         } while (displayGrid[locationX][locationY] != '$');
 
         printf("You just choose [%d][%d] the real number is: %d\n", locationX, locationY, values[locationX][locationY]);
-        //Ralf
+        
 
         if (values[locationX][locationY] & 1) {//Ralfs
 
@@ -113,7 +113,7 @@ int main()
 
         }
 
-        printf("\Grid:\n");//Ralf
+        printf("\Grid:\n");
         for (row = 0; row < size; row++) {
             printf("%d\t", row);
             for (col = 0; col < size; col++) {
