@@ -18,7 +18,7 @@ int main()
 
     int locationX, locationY;
 
-    char password[] = "Alex07"; //ale
+    char password[] = "67"; //ale
     char input[10];
 
     for (int i = 0; i < 3; i++) {
@@ -46,6 +46,13 @@ int main()
 
     srand((int)time(0));
 
+    int currentPlayer;
+    int randomStart = rand() % 2;//ALE 
+    if (randomStart % 2 == 0)
+        currentPlayer = 1;
+    else
+        currentPlayer = 2;
+    printf("Player %d starts first!\n", currentPlayer);
 
     for (row = 0; row < size; row++) {
         for (col = 0; col < size; col++) {
@@ -67,6 +74,7 @@ int main()
 
 
     for (int loop = 0; loop < 18; loop++) {
+        printf("\nPlayer %d is your turn \n", currentPlayer); // MULTIPLAYER
         printf("choose a location [x]: ");
         scanf_s("%d", &locationX);
         printf("choose a location [y]: ");
@@ -103,6 +111,8 @@ int main()
         }
         printf("\t1\t2\t3\t4\t5\t6\n");
         printf("\nyou found %i gold", gold);//ralfs
+
+        currentPlayer = 3 - currentPlayer; // change player ALE
     }
     return 0;
 }
