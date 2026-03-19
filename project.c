@@ -54,13 +54,13 @@ int main()
     }
 
 
-    printf("\Grid:\n");
+    printf("\Grid:\n");//Ralf
     for (row = 0; row < size; row++) {
         printf("%d\t", row);
         for (col = 0; col < size; col++) {
             printf("[%d][%d] %c ", row, col, displayGrid[row][col]);
         }
-        printf("\n");
+        printf("\n"); 
     }
     printf("\t1\t2\t3\t4\t5\t6\n");
 
@@ -70,6 +70,7 @@ int main()
     scanf_s("%d", &locationY);
 
     printf("You just choose [%d][%d] the real number is: %d\n", locationX, locationY, values[locationX][locationY]);
+    //Ralf
     
     if (values[row][col] & 2) {
 
