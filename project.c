@@ -7,11 +7,12 @@
 #include <conio.h>
 #include <time.h>
 #include <string.h>
+#include <stdint.h>
 
 int main()
 {
     char displayGrid[6][6];
-    int values[6][6];
+    uint8_t values[6][6];
     int row, col, size = 6;
 
     int locationX, locationY;
@@ -69,6 +70,10 @@ int main()
     scanf_s("%d", &locationY);
 
     printf("You just choose [%d][%d] the real number is: %d\n", locationX, locationY, values[locationX][locationY]);
+    
+    if (values[row][col] & 2) {
+
+    }
 
     return 0;
 }
