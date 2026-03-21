@@ -6,12 +6,17 @@
 #include <string.h>
 #include <stdint.h>
 
+void scoretracker(int gold,int player,int *player1Score , int *player2Score, char type, int *player1Bombs, int *player2Bombs);
+
 int main()
 {
     char displayGrid[6][6];
     uint8_t values[6][6];
     int row, col, size = 6;
     int gold = 0;
+    int player1Score = 0, player2Score = 0, player1Bombs = 0, player2Bombs = 0;
+    
+
     
 
     int locationX, locationY;
@@ -71,12 +76,12 @@ int main()
     printf("\t1\t2\t3\t4\t5\t6\n");//ralfsEnd
 
 
-    for (int loop = 0; loop < 3; loop++) {
+    for (int loop = 0; loop < 36; loop++) {
 
 
         printf("Player %d is your turn \n", currentPlayer); // MULTIPLAYER ALE
         
-        do {
+        do {//RalfsStart
 
             printf("choose a location [x]: ");
             scanf_s("%d", &locationX);
@@ -92,9 +97,10 @@ int main()
         printf("You just choose [%d][%d] the real number is: %d\n", locationX, locationY, values[locationX][locationY]);
         
 
-        if (values[locationX][locationY] & 1) {//Ralfs
+        if (values[locationX][locationY] & 1) {
 
             displayGrid[locationX][locationY] = 'B';
+            printf("You found a bomb !\n");
 
         }
 
@@ -105,6 +111,10 @@ int main()
             
             gold = values[locationX][locationY];
             printf("\nyou found %i gold", gold);
+            
+            
+
+           
         }
 
         else
@@ -112,6 +122,9 @@ int main()
             displayGrid[locationX][locationY] = 'E';
 
         }
+
+        scoretracker(gold, currentPlayer, &player1Score, &player2Score, displayGrid[locationX][locationY], &player1Bombs, &player2Bombs);
+        printf("\ncurrent score:\nplayer1: %i \n Player2: %i \n player 1 bomb(s): %i, player 2 bomb(s): %i \n", player1Score, player2Score, player1Bombs, player2Bombs);
 
         printf("\Grid:\n");
         for (row = 0; row < size; row++) {
@@ -121,10 +134,34 @@ int main()
             }
             printf("\n");
         }
-        printf("\t1\t2\t3\t4\t5\t6\n");//Ralfs
+        printf("\t1\t2\t3\t4\t5\t6\n");//RalfsEnd
+
         currentPlayer = 3 - currentPlayer; // change player ALE
 
     }
         
     return 0;
 }
+
+void scoretracker(int gold, int player, int* player1Score, int* player2Score, char type, int* player1Bombs, int* player2Bombs) //ralfs
+{
+    if (type == 'G') {
+        if (player == 1) {
+            *player1Score = *player1Score + gold;
+        }
+        else {
+            *player2Score = *player2Score + gold;
+        }
+    }
+    if (type == 'B') {
+        if (player == 1) {
+            *player1Score = *player1Score - 1;
+            (*player1Bombs)++;
+        }
+        else {
+            *player2Score = *player2Score - 1;
+            (*player2Bombs)++;
+        }
+    }
+
+}//ralfsEnd
