@@ -60,20 +60,24 @@ int main()
     for (row = 0; row < size; row++) {
         for (col = 0; col < size; col++) {
             values[row][col] = rand() % 256;
-            displayGrid[row][col] = '$';
+            displayGrid[row][col] = '?';
         }
     } //Ale
 
 
     printf("\Grid:\n");//RalfsStart
     for (row = 0; row < size; row++) {
-        printf("%d\t", row);
+        printf("\t\t%d|", row);
+        
         for (col = 0; col < size; col++) {
-            printf("[%d][%d] %c ", row, col, displayGrid[row][col]);
+            printf(" \t%c ",displayGrid[row][col]);
         }
         printf("\n"); 
     }
-    printf("\t1\t2\t3\t4\t5\t6\n");//ralfsEnd
+    printf("\t\t\t------------------------------------------\n");
+    printf("\t\t\t0 \t1 \t2 \t3 \t4 \t5\n");//ralfsEnd
+    printf("\t\t\t------------------------------------------\n");
+    
 
 
     for (int loop = 0; loop < 36; loop++) {
@@ -88,24 +92,24 @@ int main()
             printf("choose a location [y]: ");
             scanf_s("%d", &locationY);
         
-            if (displayGrid[locationX][locationY] != '$') {
+            if (displayGrid[locationX][locationY] != '?') {
                 printf("This location has already been searched, try again!\n");
             }
 
-        } while (displayGrid[locationX][locationY] != '$');
+        } while (displayGrid[locationX][locationY] != '?');
 
         printf("You just choose [%d][%d] the real number is: %d\n", locationX, locationY, values[locationX][locationY]);
         
 
         if (values[locationX][locationY] & 1) {
 
-            displayGrid[locationX][locationY] = 'B';
+            displayGrid[locationX][locationY] = '!';
             printf("You found a bomb !\n");
 
         }
 
         else if (values[locationX][locationY] & 2) {
-            displayGrid[locationX][locationY] = 'G';
+            displayGrid[locationX][locationY] = '$';
 
             values[locationX][locationY] = (values[locationX][locationY] >> 4);
             
@@ -119,22 +123,25 @@ int main()
 
         else
         {
-            displayGrid[locationX][locationY] = 'E';
+            displayGrid[locationX][locationY] = 'X';
 
         }
 
         scoretracker(gold, currentPlayer, &player1Score, &player2Score, displayGrid[locationX][locationY], &player1Bombs, &player2Bombs);
         printf("\ncurrent score:\nplayer1: %i \n Player2: %i \n player 1 bomb(s): %i, player 2 bomb(s): %i \n", player1Score, player2Score, player1Bombs, player2Bombs);
 
-        printf("\Grid:\n");
+        printf("\Grid:\n");//RalfsStart
         for (row = 0; row < size; row++) {
-            printf("%d\t", row);
+            printf("\t\t%d|", row);
+
             for (col = 0; col < size; col++) {
-                printf("[%d][%d] %c ", row, col, displayGrid[row][col]);
+                printf(" \t%c ", displayGrid[row][col]);
             }
             printf("\n");
         }
-        printf("\t1\t2\t3\t4\t5\t6\n");//RalfsEnd
+        printf("\t\t\t------------------------------------------\n");
+        printf("\t\t\t0 \t1 \t2 \t3 \t4 \t5\n");//ralfsEnd
+        printf("\t\t\t------------------------------------------\n");
 
         currentPlayer = 3 - currentPlayer; // change player ALE
 
@@ -145,7 +152,7 @@ int main()
 
 void scoretracker(int gold, int player, int* player1Score, int* player2Score, char type, int* player1Bombs, int* player2Bombs) //ralfs
 {
-    if (type == 'G') {
+    if (type == '$') {
         if (player == 1) {
             *player1Score = *player1Score + gold;
         }
@@ -153,7 +160,7 @@ void scoretracker(int gold, int player, int* player1Score, int* player2Score, ch
             *player2Score = *player2Score + gold;
         }
     }
-    if (type == 'B') {
+    if (type == '!') {
         if (player == 1) {
             *player1Score = *player1Score - 1;
             (*player1Bombs)++;
