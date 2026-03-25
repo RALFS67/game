@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdint.h>
 
-void scoretracker(int gold,int player,int *player1Score , int *player2Score, char type, int *player1Bombs, int *player2Bombs);
+void scoretracker(int gold, int player, int* player1Score, int* player2Score, char type, int* player1Bombs, int* player2Bombs);
 
 int main()
 {
@@ -15,9 +15,10 @@ int main()
     int row, col, size = 6;
     int gold = 0;
     int player1Score = 0, player2Score = 0, player1Bombs = 0, player2Bombs = 0;
-    
 
-    
+    char player1Name[20]; // USERNAME
+    char player2Name[20]; // USERNAME
+
 
     int locationX, locationY;
 
@@ -34,6 +35,19 @@ int main()
 
         if (strcmp(password, input) == 0) {
             printf("Correct password! The game starts now.\n");
+
+            printf("Enter name for Player 1: "); // USERNAME
+            fgets(player1Name, sizeof(player1Name), stdin); // USERNAME
+            if (player1Name[strlen(player1Name) - 1] == '\n') { // USERNAME
+                player1Name[strlen(player1Name) - 1] = '\0'; // USERNAME
+            }
+
+            printf("Enter name for Player 2: "); // USERNAME
+            fgets(player2Name, sizeof(player2Name), stdin); // USERNAME
+            if (player2Name[strlen(player2Name) - 1] == '\n') { // USERNAME
+                player2Name[strlen(player2Name) - 1] = '\0'; // USERNAME
+            }
+
             break;
         }
         else {
@@ -55,43 +69,50 @@ int main()
         currentPlayer = 1;
     else
         currentPlayer = 2;
-    printf("Player %d starts first!\n", currentPlayer);
+
+    if (currentPlayer == 1) // USERNAME
+        printf("%s starts first!\n", player1Name); // USERNAME
+    else
+        printf("%s starts first!\n", player2Name); // USERNAME
 
     for (row = 0; row < size; row++) {
         for (col = 0; col < size; col++) {
             values[row][col] = rand() % 256;
             displayGrid[row][col] = '?';
         }
-    } //Ale
+    }
 
 
-    printf("\Grid:\n");//RalfsStart
+    printf("\Grid:\n");
     for (row = 0; row < size; row++) {
         printf("\t\t%d|", row);
-        
+
         for (col = 0; col < size; col++) {
-            printf(" \t%c ",displayGrid[row][col]);
+            printf(" \t%c ", displayGrid[row][col]);
         }
-        printf("\n"); 
+        printf("\n");
     }
     printf("\t\t\t------------------------------------------\n");
-    printf("\t\t\t0 \t1 \t2 \t3 \t4 \t5\n");//ralfsEnd
+    printf("\t\t\t0 \t1 \t2 \t3 \t4 \t5\n");
     printf("\t\t\t------------------------------------------\n");
-    
+
 
 
     for (int loop = 0; loop < 36; loop++) {
 
 
-        printf("Player %d is your turn \n", currentPlayer); // MULTIPLAYER ALE
-        
-        do {//RalfsStart
+        if (currentPlayer == 1) // USERNAME
+            printf("%s is your turn \n", player1Name); // USERNAME
+        else
+            printf("%s is your turn \n", player2Name); // USERNAME
+
+        do {
 
             printf("choose a location [x]: ");
             scanf_s("%d", &locationX);
             printf("choose a location [y]: ");
             scanf_s("%d", &locationY);
-        
+
             if (displayGrid[locationX][locationY] != '?') {
                 printf("This location has already been searched, try again!\n");
             }
@@ -99,7 +120,7 @@ int main()
         } while (displayGrid[locationX][locationY] != '?');
 
         printf("You just choose [%d][%d] the real number is: %d\n", locationX, locationY, values[locationX][locationY]);
-        
+
 
         if (values[locationX][locationY] & 1) {
 
@@ -112,13 +133,10 @@ int main()
             displayGrid[locationX][locationY] = '$';
 
             values[locationX][locationY] = (values[locationX][locationY] >> 4);
-            
+
             gold = values[locationX][locationY];
             printf("\nyou found %i gold", gold);
-            
-            
 
-           
         }
 
         else
@@ -128,9 +146,14 @@ int main()
         }
 
         scoretracker(gold, currentPlayer, &player1Score, &player2Score, displayGrid[locationX][locationY], &player1Bombs, &player2Bombs);
-        printf("\ncurrent score:\nplayer1: %i \n Player2: %i \n player 1 bomb(s): %i, player 2 bomb(s): %i \n", player1Score, player2Score, player1Bombs, player2Bombs);
 
-        printf("\Grid:\n");//RalfsStart
+        printf("\ncurrent score:\n%s: %i \n%s: %i \n%s bomb(s): %i, %s bomb(s): %i \n",
+            player1Name, player1Score,
+            player2Name, player2Score,
+            player1Name, player1Bombs,
+            player2Name, player2Bombs); // USERNAME
+
+        printf("\Grid:\n");
         for (row = 0; row < size; row++) {
             printf("\t\t%d|", row);
 
@@ -140,17 +163,17 @@ int main()
             printf("\n");
         }
         printf("\t\t\t------------------------------------------\n");
-        printf("\t\t\t0 \t1 \t2 \t3 \t4 \t5\n");//ralfsEnd
+        printf("\t\t\t0 \t1 \t2 \t3 \t4 \t5\n");
         printf("\t\t\t------------------------------------------\n");
 
-        currentPlayer = 3 - currentPlayer; // change player ALE
+        currentPlayer = 3 - currentPlayer;
 
     }
-        
+
     return 0;
 }
 
-void scoretracker(int gold, int player, int* player1Score, int* player2Score, char type, int* player1Bombs, int* player2Bombs) //ralfs
+void scoretracker(int gold, int player, int* player1Score, int* player2Score, char type, int* player1Bombs, int* player2Bombs)
 {
     if (type == '$') {
         if (player == 1) {
@@ -170,5 +193,4 @@ void scoretracker(int gold, int player, int* player1Score, int* player2Score, ch
             (*player2Bombs)++;
         }
     }
-
-}//ralfsEnd
+}
