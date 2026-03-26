@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdint.h>
 
+
 void scoretracker(int gold, int player, int* player1Score, int* player2Score, char type, int* player1Bombs, int* player2Bombs);
 void game(char *playerName1 , char *playerName2,int* player1TotalWins , int* player2TotalWins);
 
@@ -143,7 +144,7 @@ void game(char* playerName1, char* playerName2, int* player1TotalWins, int* play
     printf("\t\t\t  \t  \t    X \t \t \n");
 
 
-        for (loop = 0; loop <= 36; loop++) {
+        for (loop = 0; loop < 36; loop++) {
 
 
             if (currentPlayer == 1) // USERNAME
@@ -162,7 +163,9 @@ void game(char* playerName1, char* playerName2, int* player1TotalWins, int* play
                     printf("This location has already been searched, try again!\n");
                 }
 
-            } while (displayGrid[locationY][locationX] != '?');
+                
+
+            } while (displayGrid[locationY][locationX] != '?' );
 
             // printf("You just choose [%d][%d] the real number is: %d\n", locationX, locationY, values[locationX][locationY]);
 
@@ -239,7 +242,7 @@ void game(char* playerName1, char* playerName2, int* player1TotalWins, int* play
             printf("\t\t\t------------------------------------------\n");
             printf("\t\t\t  \t  \t    X \t \t \n");
 
-            currentPlayer = 3 - currentPlayer;
+            currentPlayer = 3 - currentPlayer;//Alessandro
 
             if (player1Score >= 50) {
                 printf("\n%s has won the game !!!\n", playerName1);
