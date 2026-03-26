@@ -1,7 +1,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
 #include <time.h>
 #include <string.h>
 #include <stdint.h>
@@ -231,11 +230,11 @@ void game(char* playerName1, char* playerName2, int* player1TotalWins, int* play
 
             currentPlayer = 3 - currentPlayer;
 
-            if (player1Score == 50) {
+            if (player1Score >= 50) {
                 printf("\n%s has won the game !!!\n", playerName1);
                 (*player1TotalWins)++;
             }
-            else if (player2Score == 50) {
+            else if (player2Score >= 50) {
                 printf("\n%s has won the game !!!\n", playerName2);
                 (*player2TotalWins)++;
             }
