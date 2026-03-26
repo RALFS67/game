@@ -150,32 +150,32 @@ void game(char* playerName1, char* playerName2, int* player1TotalWins, int* play
             do {
 
                 printf("choose a location [y]: ");
-                scanf_s("%d", &locationX);
-                printf("choose a location [x]: ");
                 scanf_s("%d", &locationY);
+                printf("choose a location [x]: ");
+                scanf_s("%d", &locationX);
 
-                if (displayGrid[locationX][locationY] != '?') {
+                if (displayGrid[locationY][locationX] != '?') {
                     printf("This location has already been searched, try again!\n");
                 }
 
-            } while (displayGrid[locationX][locationY] != '?');
+            } while (displayGrid[locationY][locationX] != '?');
 
             // printf("You just choose [%d][%d] the real number is: %d\n", locationX, locationY, values[locationX][locationY]);
 
 
-            if (values[locationX][locationY] & 1) {
+            if (values[locationY][locationX] & 1) {
 
-                displayGrid[locationX][locationY] = '!';
+                displayGrid[locationY][locationX] = '!';
                 printf("You found a bomb !\n");
 
             }
 
-            else if (values[locationX][locationY] & 2) {
-                displayGrid[locationX][locationY] = '$';
+            else if (values[locationY][locationX] & 2) {
+                displayGrid[locationY][locationX] = '$';
 
-                values[locationX][locationY] = (values[locationX][locationY] >> 4);
+                values[locationY][locationX] = (values[locationY][locationX] >> 4);
 
-                gold = values[locationX][locationY];
+                gold = values[locationY][locationX];
                 if (gold == 0) {
 
                     if (currentPlayer == 1) {
@@ -199,17 +199,17 @@ void game(char* playerName1, char* playerName2, int* player1TotalWins, int* play
 
             else
             {
-                displayGrid[locationX][locationY] = 'X';
+                displayGrid[locationY][locationX] = 'X';
 
             }
 
-            scoretracker(gold, currentPlayer, &player1Score, &player2Score, displayGrid[locationX][locationY], &player1Bombs, &player2Bombs);
+            scoretracker(gold, currentPlayer, &player1Score, &player2Score, displayGrid[locationY][locationX], &player1Bombs, &player2Bombs);
 
 
 
             printf("\nGrid:\n");
 
-            printf("\ncurrent score:\n%s: %i \n%s: %i \n%s bomb(s): %i, %s bomb(s): %i \n",
+            printf("\ncurrent score: %s: %i \t %s: %i \t%s bomb(s): %i \t %s bomb(s): %i \n",
                 playerName1, player1Score,
                 playerName2, player2Score,
                 playerName1, player1Bombs,
