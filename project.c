@@ -125,9 +125,13 @@ void game(char* playerName1, char* playerName2, int* player1TotalWins, int* play
     printf("---------------------------------------------------------------------------------\n\n");
 
 
-    printf("Grid:\n");
     for (row = 0; row < size; row++) {
-        printf("\t\t%d|", row);
+        if (row == 3) {
+            printf("\tY\t%d|", row);
+        }
+        else {
+            printf("\t\t%d|", row);
+        }
 
         for (col = 0; col < size; col++) {
             printf(" \t%c ", displayGrid[row][col]);
@@ -137,6 +141,7 @@ void game(char* playerName1, char* playerName2, int* player1TotalWins, int* play
     printf("\t\t\t------------------------------------------\n");
     printf("\t\t\t0 \t1 \t2 \t3 \t4 \t5\n");
     printf("\t\t\t------------------------------------------\n");
+    printf("\t\t\t  \t  \t    X \t \t \n");
 
 
         for (loop = 0; loop <= 36; loop++) {
@@ -218,7 +223,12 @@ void game(char* playerName1, char* playerName2, int* player1TotalWins, int* play
 
 
             for (row = 0; row < size; row++) {
-                printf("\t\t%d|", row);
+                if (row == 3) {
+                    printf("\tY\t%d|", row);
+                }
+                else {
+                    printf("\t\t%d|", row);
+                }
 
                 for (col = 0; col < size; col++) {
                     printf(" \t%c ", displayGrid[row][col]);
@@ -228,6 +238,7 @@ void game(char* playerName1, char* playerName2, int* player1TotalWins, int* play
             printf("\t\t\t------------------------------------------\n");
             printf("\t\t\t0 \t1 \t2 \t3 \t4 \t5\n");
             printf("\t\t\t------------------------------------------\n");
+            printf("\t\t\t  \t  \t    X \t \t \n");
 
             currentPlayer = 3 - currentPlayer;
 
