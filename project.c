@@ -158,11 +158,18 @@ void game(char* playerName1, char* playerName2, int* player1TotalWins, int* play
                 printf("choose a location [x]: ");
                 scanf_s("%d", &locationX);
 
-                if (displayGrid[locationY][locationX] != '?') {
+                if (locationY < 0 || locationY >= size || locationX < 0 || locationX >= size) {
+                    printf("OUT OF BOUNDS TRY AGAIN \n");
+                }
+
+                else if (displayGrid[locationY][locationX] != '?') {
                     printf("This location has already been searched, try again!\n");
                 }
 
-            } while (displayGrid[locationY][locationX] != '?');
+                
+
+
+            } while (displayGrid[locationY][locationX] != '?' || locationY < 0 || locationY >= size || locationX < 0 || locationX >= size);
 
             // printf("You just choose [%d][%d] the real number is: %d\n", locationX, locationY, values[locationX][locationY]);
 
